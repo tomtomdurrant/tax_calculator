@@ -4,9 +4,9 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class LibraryTest {
+public class BillRunTest {
     @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+        BillCalculator billCalculator = new BillCalculator();
+        assertTrue("someLibraryMethod should return 'true'", billCalculator.someLibraryMethod());
     }
 }
