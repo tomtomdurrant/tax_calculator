@@ -6,11 +6,13 @@ class Vehicle {
     private final int co2Emissions;
     private final FuelType fuelType;
     private LocalDate dateOfFirstRegistration;
+    private int listPrice;
 
-    Vehicle(int co2Emissions, FuelType fuelType, LocalDate dateOfFirstRegistration) {
+    Vehicle(int co2Emissions, FuelType fuelType, LocalDate dateOfFirstRegistration, int listPrice) {
         this.co2Emissions = co2Emissions;
         this.fuelType = fuelType;
         this.dateOfFirstRegistration = dateOfFirstRegistration;
+        this.listPrice = listPrice;
     }
 
     public int getCo2Emissions() {
