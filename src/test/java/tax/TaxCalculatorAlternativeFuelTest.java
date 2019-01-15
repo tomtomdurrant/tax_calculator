@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import static java.time.Month.JANUARY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static tax.FuelType.ALTERNATIVE_FUEL;
+import static tax.FuelType.ELECTRIC;
 
 @Ignore
 public class TaxCalculatorAlternativeFuelTest {
@@ -97,5 +98,11 @@ public class TaxCalculatorAlternativeFuelTest {
     public void firstYearsTaxForAlternativeFuel_over_255_grams_co2() {
         Vehicle vehicle = new Vehicle(256, ALTERNATIVE_FUEL, FIRST_OF_JAN_2019, 20000);
         assertThat(taxCalculator.calculateTax(vehicle)).isEqualTo(2060);
+    }
+
+    @Test
+    public void firstYearsTaxForElectric() {
+        Vehicle vehicle = new Vehicle(0, ELECTRIC, FIRST_OF_JAN_2019, 20000);
+        assertThat(taxCalculator.calculateTax(vehicle)).isEqualTo(0);
     }
 }
