@@ -19,6 +19,7 @@ public class TaxCalculatorPetrolTest {
     @Before
     public void setUp() {
         taxCalculator = new DummyTaxCalculator();
+        taxCalculator.setCurrentYear(2019);
     }
 
     @Test
