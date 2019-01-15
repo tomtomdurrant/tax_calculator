@@ -1,14 +1,16 @@
 package tax;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static java.time.Month.JANUARY;
+import static org.assertj.core.api.Assertions.assertThat;
 import static tax.FuelType.DIESEL;
 
+@Ignore
 public class TaxCalculatorDieselTest {
 
     public static final LocalDate FIRST_OF_JAN_2019 = LocalDate.of(2019, JANUARY, 1);
