@@ -3,7 +3,7 @@ package tax;
 import java.time.LocalDate;
 
 abstract class TaxCalculator{
-    private int year;
+    private final int year;
 
     abstract int calculateTax(Vehicle vehicle);
 
@@ -13,5 +13,9 @@ abstract class TaxCalculator{
 
     TaxCalculator(int year){
         this.year = year;
+    }
+
+    int getYear() {
+        return year;
     }
 }

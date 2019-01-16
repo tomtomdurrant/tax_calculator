@@ -1,8 +1,18 @@
 package tax;
 
-public class TaxCalculator2019 extends TaxCalculator {
+class TaxCalculator2019 extends TaxCalculator {
     @Override
     public int calculateTax(Vehicle vehicle) {
+        int cost;
+        if(getYear() == vehicle.getDateOfFirstRegistration().getYear()){
+            cost = calculateFirstYearsTax(vehicle);
+        } else {
+            cost = calculateTaxForSubsequentYears(vehicle);
+        }
+        return cost;
+    }
+
+    private int calculateFirstYearsTax(Vehicle vehicle) {
         int cost;
         int co2Emissions = vehicle.getCo2Emissions();
 
@@ -17,10 +27,33 @@ public class TaxCalculator2019 extends TaxCalculator {
                 cost = calculateTaxForAlternativeFuel(co2Emissions);
                 break;
             case ELECTRIC:
-                cost = calculateTaxForElectric(co2Emissions);
+                cost = calculateTaxForElectric();
                 break;
             default:
                 throw new IllegalStateException("The supplied fuel type: " + vehicle.getFuelType() + " was not recognised.");
+        }
+        return cost;
+    }
+
+    private int calculateTaxForSubsequentYears(Vehicle vehicle) {
+        int cost;
+        switch (vehicle.getFuelType()){
+            case PETROL:
+            case DIESEL:
+                cost = 140;
+                break;
+            case ELECTRIC:
+                cost = 0;
+                break;
+            case ALTERNATIVE_FUEL:
+                cost = 130;
+                break;
+            default:
+                throw new IllegalStateException("The supplied fuel type: " + vehicle.getFuelType() + " was not recognised.");
+        }
+
+        if(vehicle.getListPrice() > 40000){
+            cost += 310;
         }
 
         return cost;
@@ -122,7 +155,7 @@ public class TaxCalculator2019 extends TaxCalculator {
         return cost;
     }
 
-    private int calculateTaxForElectric(int co2Emissions) {
+    private int calculateTaxForElectric() {
         return 0;
     }
 }
