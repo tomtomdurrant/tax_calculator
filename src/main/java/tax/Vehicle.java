@@ -27,7 +27,7 @@ class Vehicle {
         return dateOfFirstRegistration;
     }
 
-    public int getListPrice() {
+    int getListPrice() {
         return listPrice;
     }
 }
