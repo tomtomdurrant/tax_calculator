@@ -91,7 +91,7 @@ public class TaxCalculatorAlternativeFuelTest {
     @Test
     public void firstYearsTaxForAlternativeFuel_226_to_255_grams_co2() {
         Vehicle vehicle = new Vehicle(255, ALTERNATIVE_FUEL, FIRST_OF_JAN_2019, 20000);
-        assertThat(taxCalculator.calculateTax(vehicle)).isEqualTo(1760);
+        assertThat(taxCalculator.calculateTax(vehicle)).isEqualTo(1750);
     }
 
     @Test
