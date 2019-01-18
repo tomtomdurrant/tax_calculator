@@ -4,6 +4,8 @@ This code is a simplified implementation of the rules for UK vehicle tax as of 2
 
 ## The rules for use in the exercises are summarized below:
 
+### Story 1
+
 ##### First tax payment when you register the vehicle
 
 |C02 g/km   |Petrol |
@@ -23,6 +25,8 @@ This code is a simplified implementation of the rules for UK vehicle tax as of 2
 |Over 255	|£2,070	|
 
 ---
+
+### Story 2
 
 ##### First tax payment when you register the vehicle
 
@@ -44,6 +48,8 @@ This code is a simplified implementation of the rules for UK vehicle tax as of 2
 
 ---
 
+### Story 3
+
 ##### First tax payment when you register the vehicle
 
 |C02 g/km   |Alternative Fuel|
@@ -64,6 +70,8 @@ This code is a simplified implementation of the rules for UK vehicle tax as of 2
 
 ---
 
+### Story 4
+
 ##### Rates for second tax payment onwards
 
 |Fuel                   |Cost    |
@@ -73,6 +81,8 @@ This code is a simplified implementation of the rules for UK vehicle tax as of 2
 |Alternative            |£130    |
 
 ---
+
+### Story 5
 
 ##### Vehicles with a list price of more than £40,000
 
