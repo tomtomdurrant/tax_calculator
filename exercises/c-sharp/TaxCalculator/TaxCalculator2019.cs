@@ -1,4 +1,6 @@
-﻿namespace TaxCalculator
+﻿using System;
+
+namespace TaxCalculator
 {
     public class TaxCalculator2019 : TaxCalculator
     {
@@ -21,6 +23,8 @@
                 case FuelType.AlternativeFuel:
                     cost = CalculateTaxForAlternativeFuel(co2Emissions);
                     break;
+                default:
+                    throw new InvalidOperationException($"Unrecognized fuel type - {vehicle.FuelType}");
             }
 
             return cost;
