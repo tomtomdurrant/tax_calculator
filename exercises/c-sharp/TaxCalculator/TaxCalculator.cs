@@ -4,7 +4,7 @@ namespace TaxCalculator
 {
     public abstract class TaxCalculator
     {
-        private int Year { get; }
+        protected int Year { get; }
 
         public abstract int CalculateTax(Vehicle vehicle);
 
