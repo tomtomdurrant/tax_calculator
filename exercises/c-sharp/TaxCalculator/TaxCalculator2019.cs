@@ -7,8 +7,23 @@ namespace TaxCalculator
         public override int CalculateTax(Vehicle vehicle)
         {
             int cost = 0;
-            int co2Emissions = vehicle.Co2Emissions;
 
+            if (Year == vehicle.DateOfFirstRegistration.Year)
+            {
+                cost = CalculateFirstYearsTax(vehicle);
+            }
+            else
+            {
+                cost = CalculateTaxForSubsequentYears(vehicle);
+            }
+
+            return cost;
+        }
+
+        private static int CalculateFirstYearsTax(Vehicle vehicle)
+        {
+            int cost;
+            int co2Emissions = vehicle.Co2Emissions;
             switch (vehicle.FuelType)
             {
                 case FuelType.Petrol:
@@ -25,6 +40,33 @@ namespace TaxCalculator
                     break;
                 default:
                     throw new InvalidOperationException($"Unrecognized fuel type - {vehicle.FuelType}");
+            }
+
+            return cost;
+        }
+
+        private static int CalculateTaxForSubsequentYears(Vehicle vehicle)
+        {
+            int cost = 0;
+            switch (vehicle.FuelType)
+            {
+                case FuelType.Petrol:
+                case FuelType.Diesel:
+                    cost = 140;
+                    break;
+                case FuelType.Electric:
+                    cost = 0;
+                    break;
+                case FuelType.AlternativeFuel:
+                    cost = 130;
+                    break;
+                default:
+                    throw new InvalidOperationException($"Unrecognized fuel type - {vehicle.FuelType}");
+            }
+
+            if (vehicle.ListPrice > 40000)
+            {
+                cost += 310;
             }
 
             return cost;
