@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace TaxCalculator.Tests
 {
-    [Ignore("Not yet implemented")]
     class TaxCalculatorDieselTest
     {
         private static readonly DateTime FirstOfJanuary2019 = new DateTime(2019, 1, 1);
@@ -14,7 +11,7 @@ namespace TaxCalculator.Tests
         [SetUp]
         public void BeforeEach()
         {
-            _taxCalculator = new DummyTaxCalculator();
+            _taxCalculator = new TaxCalculator2019();
         }
 
         [Test]
@@ -36,7 +33,7 @@ namespace TaxCalculator.Tests
         [Test]
         public void WhenVehicleHas75GramsCo2()
         {
-            Vehicle vehicle = new Vehicle(0, FuelType.Diesel, FirstOfJanuary2019, 20000);
+            Vehicle vehicle = new Vehicle(75, FuelType.Diesel, FirstOfJanuary2019, 20000);
             int tax = _taxCalculator.CalculateTax(vehicle);
             Assert.AreEqual(105, tax);
         }
