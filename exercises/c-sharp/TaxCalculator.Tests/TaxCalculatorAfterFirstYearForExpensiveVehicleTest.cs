@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace TaxCalculator.Tests
 {
+    [Ignore("Not yet implemented")]
     class TaxCalculatorAfterFirstYearForExpensiveVehicleTest
     {
         private static readonly DateTime FirstOfApril2017 = new DateTime(2017,4,1);
