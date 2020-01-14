@@ -1,6 +1,17 @@
-# Code for exercises on continuous integration for use in bootcamps
+# Tax Calculator
 
-This code is a simplified implementation of the rules for UK vehicle tax as of 2017 (the full rules can be found here https://www.gov.uk/vehicle-tax-rate-tables)
+This code is designed to practice approaches to CI and CD in a boot camp. It is a simplified implementation of the rules for UK vehicle tax as of 2017 (the full rules can be found here https://www.gov.uk/vehicle-tax-rate-tables).
+
+## Preparation
+
+It is critical that you can push changes to github.com. Check you can by logging out and logging in again. You will need to have a git client installed. In addition, there are language specific steps below.
+
+1. Fork the project.
+1. Clone your fork using `git clone https://github.com/YOUR_USERNAME/tax_calculator`
+
+* [Java](exercises/java)
+
+That’s all in terms of preparation. Please don’t read ahead, as you’ll get the most out of the boot camp if you haven’t already read the material.
 
 ## The rules for use in the exercises are summarized below:
 
