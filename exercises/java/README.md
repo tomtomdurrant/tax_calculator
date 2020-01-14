@@ -1,5 +1,3 @@
-Do not checkout the project using IntelliJ as you’ll end up importing the root directory. Clone your fork from the command line.
-
 Then open IntelliJ IDEA and from the `File` menu choose `Open`, then select the `build.gradle` file from the `exercises\java` directory.
 
 When prompted, choose to `Open as project`. IntelliJ should download all the dependencies required, and you should end up with no problems.

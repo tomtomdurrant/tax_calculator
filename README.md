@@ -7,9 +7,10 @@ This code is designed to practice approaches to CI and CD in a boot camp. It is 
 It is critical that you can push changes to github.com. Check you can by logging out and logging in again. You will need to have a git client installed. In addition, there are language specific steps below.
 
 1. Fork the project.
-1. Clone your fork using `git clone https://github.com/YOUR_USERNAME/tax_calculator`
+1. Do not clone the project using your IDE as you’ll end up opening/importing the root directory. Clone your fork from the command line by running `git clone https://github.com/YOUR_USERNAME/tax_calculator`
 
 * [Java](exercises/java)
+* [.NET](exercises/dotnet)
 
 That’s all in terms of preparation. Please don’t read ahead, as you’ll get the most out of the boot camp if you haven’t already read the material.
 
