@@ -8,10 +8,10 @@ It is critical that you can push changes to github.com. Check you can by logging
 
 1. Fork the project.
 1. Do not clone the project using your IDE as you’ll end up opening/importing the root directory. Clone your fork from the command line by running `git clone https://github.com/YOUR_USERNAME/tax_calculator`
-
-* [Java](exercises/java)
-* [JavaScript](exercises/javascript)
-* [.NET](exercises/dotnet)
+1. Complete the language specific set up to get your environment working:
+    * [Java](exercises/java)
+    * [JavaScript](exercises/javascript)
+    * [.NET](exercises/dotnet)
 
 That’s all in terms of preparation. Please don’t read ahead, as you’ll get the most out of the boot camp if you haven’t already read the material.
 
