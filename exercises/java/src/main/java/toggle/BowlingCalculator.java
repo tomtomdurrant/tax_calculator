@@ -1,7 +1,5 @@
 package toggle;
 
-import com.google.common.annotations.VisibleForTesting;
-
 public class BowlingCalculator {
     private final boolean spareScoring;
 
@@ -9,7 +7,6 @@ public class BowlingCalculator {
         this(false);
     }
 
-    @VisibleForTesting
     BowlingCalculator(boolean spareScoring) {
         this.spareScoring = spareScoring;
     }
