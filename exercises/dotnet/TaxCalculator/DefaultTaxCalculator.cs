@@ -13,6 +13,13 @@ namespace TaxCalculator
                 where newEmission.Key >= emissions
                 select newEmission.Value;
             return answer;*/
+           if (vehicle.FuelType == FuelType.Diesel)
+            {
+                return StaticEmissions.DieselEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions).Value;
+            }
+
+
+
             return StaticEmissions.PetrolEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions).Value;
         }
     }
