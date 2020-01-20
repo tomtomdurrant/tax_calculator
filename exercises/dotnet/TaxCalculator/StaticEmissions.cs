@@ -37,6 +37,22 @@ namespace TaxCalculator
             {225, 1760},
             {255, 2070},
             {MaxValue, 2070}
+          
+        public static Dictionary<int, int> AlternativeFuelEmissionsDictionary = new Dictionary<int, int>()
+        {
+            {0, 0},
+            {50, 0},
+            {75, 15},
+            {90, 95},
+            {100, 115},
+            {110, 135},
+            {130, 155},
+            {150, 195},
+            {170, 505},
+            {190, 820},
+            {225, 1230},
+            {255, 1750},
+            {MaxValue, 2060}
         };
     }
 }
