@@ -15,8 +15,14 @@ namespace TaxCalculator
                 totalTax = StaticEmissions.AlternativeFuelEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
                     .Value;
             }
+            if (vehicle.FuelType == FuelType.Diesel)
+            {
+                totalTax = StaticEmissions.DieselEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions).Value;
+            }
 
             return totalTax;
+            
+            
             /*var newEmissions = StaticEmissions.PetrolEmissionsDictionary;
             var answer = from newEmission
                     in newEmissions
