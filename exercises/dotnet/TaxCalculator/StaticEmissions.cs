@@ -5,9 +5,9 @@ namespace TaxCalculator
 {
     public static class StaticEmissions
     {
-        public static Dictionary<int, int> PetrolEmissions = new Dictionary<int, int>
+        public static Dictionary<int, int> PetrolEmissionsDictionary = new Dictionary<int, int>
         {
-            {0,0},
+            {0, 0},
             {50, 10},
             {75, 25},
             {90, 105},
