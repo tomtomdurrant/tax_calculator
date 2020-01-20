@@ -1,2 +1,8 @@
 language: csharp
-solution: TaxCalculator.Tests.sln
+solution: excercises/dotnet/TaxCalculator.sln
+before_script: "cd exercises/dotnet"
+mono: none
+dotnet: "2.1.502"
+script: 
+  - "dotnet restore"
+  - "dotnet test"
