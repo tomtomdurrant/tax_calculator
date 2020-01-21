@@ -7,64 +7,94 @@ namespace TaxCalculator
     {
         private static readonly DateTime FirstOfJanuary2019 = new DateTime(2019, 1, 1);
 
-        public override int CalculateTax(Vehicle vehicle)
+        public override int CalculateTax (Vehicle vehicle)
         {
-            int totalTax;
-            if ((FirstOfJanuary2019 - vehicle.DateOfFirstRegistration).TotalDays >= 365)
+            bool isVehicleOlderThanOneYear = (FirstOfJanuary2019 - vehicle.DateOfFirstRegistration).TotalDays >= 365;
+            bool isVehicleOverFortyThousand = vehicle.ListPrice >= 40000;
+            int vehicleTax;
+            
+            if (isVehicleOlderThanOneYear)
             {
-                if (vehicle.ListPrice >= 40000)
+                if (isVehicleOverFortyThousand)
                 {
-                    switch (vehicle.FuelType)
-                    {
-                        case FuelType.Electric:
-                            totalTax = 310;
-                            break;
-                        case FuelType.AlternativeFuel:
-                            totalTax = 440;
-                            break;
-                        default:
-                            totalTax = 450;
-                            break;
-                    }
+                    vehicleTax = CalculateTaxBasedOnFuelTypeExpensive(vehicle.FuelType);
                 }
                 else
                 {
-                    switch (vehicle.FuelType)
-                    {
-                        case FuelType.Electric:
-                            totalTax = 0;
-                            break;
-                        case FuelType.AlternativeFuel:
-                            totalTax = 130;
-                            break;
-                        default:
-                            totalTax = 140;
-                            break;
-                    }
+                    vehicleTax = CalculateTaxBasedOnFuelTypeForCheap(vehicle.FuelType);
                 }
             }
             else
             {
-                var emissions = vehicle.Co2Emissions;
-                totalTax = StaticEmissions.PetrolEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
+                vehicleTax = CalculateTaxBasedOnEmissions(vehicle.Co2Emissions, vehicle.FuelType);
+            }
+
+            return vehicleTax;
+        }
+
+        private int CalculateTaxBasedOnEmissions(int vehicleCo2Emissions, FuelType vehicleFuelType)
+        {
+            int totalTax;
+            var emissions = vehicleCo2Emissions;
+            totalTax = StaticEmissions.PetrolEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
+                .Value;
+
+            if (vehicleFuelType == FuelType.AlternativeFuel)
+            {
+                totalTax = StaticEmissions.AlternativeFuelEmissionsDictionary
+                    .FirstOrDefault(dict => dict.Key >= emissions)
                     .Value;
+            }
 
-                if (vehicle.FuelType == FuelType.AlternativeFuel)
-                {
-                    totalTax = StaticEmissions.AlternativeFuelEmissionsDictionary
-                        .FirstOrDefault(dict => dict.Key >= emissions)
-                        .Value;
-                }
-
-                if (vehicle.FuelType == FuelType.Diesel)
-                {
-                    totalTax = StaticEmissions.DieselEmissionsDictionary
-                        .FirstOrDefault(dict => dict.Key >= emissions)
-                        .Value;
-                }
+            if (vehicleFuelType == FuelType.Diesel)
+            {
+                totalTax = StaticEmissions.DieselEmissionsDictionary
+                    .FirstOrDefault(dict => dict.Key >= emissions)
+                    .Value;
             }
 
             return totalTax;
         }
+
+
+
+        private static int CalculateTaxBasedOnFuelTypeForCheap(FuelType fuelType)
+        {
+            int totalTax;
+            switch (fuelType)
+            {
+                case FuelType.Electric:
+                    totalTax = 0;
+                    break;
+                case FuelType.AlternativeFuel:
+                    totalTax = 130;
+                    break;
+                default:
+                    totalTax = 140;
+                    break;
+            }
+
+            return totalTax;
+        }
+
+        private static int CalculateTaxBasedOnFuelTypeExpensive(FuelType fuelType)
+        {
+            int totalTax;
+            switch (fuelType)
+            {
+                case FuelType.Electric:
+                    totalTax = 310;
+                    break;
+                case FuelType.AlternativeFuel:
+                    totalTax = 440;
+                    break;
+                default:
+                    totalTax = 450;
+                    break;
+            }
+
+            return totalTax;
+        }
+        
     }
 }
