@@ -12,23 +12,32 @@ namespace TaxCalculator
 
         public override int CalculateTax(Vehicle vehicle)
         {
-            var emissions = vehicle.Co2Emissions;
-            var totalTax = StaticEmissions.PetrolEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
-                .Value;
-            
-            if (vehicle.FuelType == FuelType.AlternativeFuel)
+            if (DevelopmentEnvironment)
             {
-                totalTax = StaticEmissions.AlternativeFuelEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
-                    .Value;
+                return 0;
             }
-            if (vehicle.FuelType == FuelType.Diesel)
+            else
             {
-                totalTax = StaticEmissions.DieselEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions).Value;
+                var emissions = vehicle.Co2Emissions;
+                var totalTax = StaticEmissions.PetrolEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
+                    .Value;
+
+                if (vehicle.FuelType == FuelType.AlternativeFuel)
+                {
+                    totalTax = StaticEmissions.AlternativeFuelEmissionsDictionary
+                        .FirstOrDefault(dict => dict.Key >= emissions)
+                        .Value;
+                }
+
+                if (vehicle.FuelType == FuelType.Diesel)
+                {
+                    totalTax = StaticEmissions.DieselEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
+                        .Value;
+                }
+
+                return totalTax;
             }
 
-            return totalTax;
-            
-            
             /*var newEmissions = StaticEmissions.PetrolEmissionsDictionary;
             var answer = from newEmission
                     in newEmissions
