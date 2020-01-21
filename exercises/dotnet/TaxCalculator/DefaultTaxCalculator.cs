@@ -4,6 +4,7 @@ namespace TaxCalculator
 {
     public class DefaultTaxCalculator : TaxCalculator
     {
+        public bool DevelopmentEnvironment { get; set; } = true;
         public override int CalculateTax(Vehicle vehicle)
         {
             var emissions = vehicle.Co2Emissions;
