@@ -5,53 +5,74 @@ namespace TaxCalculator
 {
     public class DefaultTaxCalculator : TaxCalculator
     {
-        public DefaultTaxCalculator(bool developmentEnvironment = false)
+        public bool Story4Feature { get; set; }
+        public bool Story5Feature { get; set; }
+
+        public DefaultTaxCalculator(bool story4Feature = false, bool story5Feature = false)
         {
-            DevelopmentEnvironment = developmentEnvironment;
+            Story4Feature = story4Feature;
+            Story5Feature = story5Feature;
         }
-        public bool DevelopmentEnvironment { get; set; }
+
 
         private static readonly DateTime FirstOfJanuary2019 = new DateTime(2019, 1, 1);
 
         public override int CalculateTax(Vehicle vehicle)
         {
-            if (DevelopmentEnvironment)
+            if (Story4Feature)
             {
                 if ((FirstOfJanuary2019 - vehicle.DateOfFirstRegistration).TotalDays >= 365)
                 {
-                    switch (vehicle.FuelType)
+                    if (Story5Feature)
                     {
-                        case FuelType.Electric:
-                            return 0;
-                        case FuelType.AlternativeFuel:
-                            return 130;
-                        default:
-                            return 140;
+                        if (vehicle.ListPrice >= 40000)
+                        {
+                            switch (vehicle.FuelType)
+                            {
+                                case FuelType.Electric:
+                                    return 310;
+                                case FuelType.AlternativeFuel:
+                                    return 440;
+                                default: return 450;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        switch (vehicle.FuelType)
+                        {
+                            case FuelType.Electric:
+                                return 0;
+                            case FuelType.AlternativeFuel:
+                                return 130;
+                            default:
+                                return 140;
+                        }
                     }
                 }
-                
-                return 0;
-            } 
 
+                var emissions = vehicle.Co2Emissions;
+                var totalTax = StaticEmissions.PetrolEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
+                    .Value;
 
-                if (vehicle.ListPrice >= 40000)
+                if (vehicle.FuelType == FuelType.AlternativeFuel)
                 {
-                    switch (vehicle.FuelType)
-                    {
-                        case FuelType.Electric:
-                            return 310;
-                        case FuelType.AlternativeFuel:
-                            return 440;
-                        default: return 450;
-                    }
+                    totalTax = StaticEmissions.AlternativeFuelEmissionsDictionary
+                        .FirstOrDefault(dict => dict.Key >= emissions)
+                        .Value;
                 }
-                else
+
+                if (vehicle.FuelType == FuelType.Diesel)
                 {
-                    // Todo
-                    return 0;
+                    totalTax = StaticEmissions.DieselEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
+                        .Value;
                 }
+
+                return totalTax;
+            
             }
             else
+
             {
                 var emissions = vehicle.Co2Emissions;
                 var totalTax = StaticEmissions.PetrolEmissionsDictionary.FirstOrDefault(dict => dict.Key >= emissions)
@@ -79,6 +100,7 @@ namespace TaxCalculator
                 where newEmission.Key >= emissions
                 select newEmission.Value;
             return answer;*/
-        }
     }
+}
+
 }
