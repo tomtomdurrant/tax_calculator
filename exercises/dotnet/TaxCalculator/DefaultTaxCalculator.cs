@@ -34,6 +34,23 @@ namespace TaxCalculator
             } 
 
 
+                if (vehicle.ListPrice >= 40000)
+                {
+                    switch (vehicle.FuelType)
+                    {
+                        case FuelType.Electric:
+                            return 310;
+                        case FuelType.AlternativeFuel:
+                            return 440;
+                        default: return 450;
+                    }
+                }
+                else
+                {
+                    // Todo
+                    return 0;
+                }
+            }
             else
             {
                 var emissions = vehicle.Co2Emissions;
