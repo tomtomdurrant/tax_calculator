@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace TaxCalculator
 {
@@ -10,12 +11,29 @@ namespace TaxCalculator
         }
         public bool DevelopmentEnvironment { get; set; }
 
+        private static readonly DateTime FirstOfJanuary2019 = new DateTime(2019, 1, 1);
+
         public override int CalculateTax(Vehicle vehicle)
         {
             if (DevelopmentEnvironment)
             {
+                if ((FirstOfJanuary2019 - vehicle.DateOfFirstRegistration).TotalDays >= 365)
+                {
+                    switch (vehicle.FuelType)
+                    {
+                        case FuelType.Electric:
+                            return 0;
+                        case FuelType.AlternativeFuel:
+                            return 130;
+                        default:
+                            return 140;
+                    }
+                }
+                
                 return 0;
-            }
+            } 
+
+
             else
             {
                 var emissions = vehicle.Co2Emissions;
