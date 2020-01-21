@@ -12,7 +12,7 @@ namespace TaxCalculator
             bool isVehicleOlderThanOneYear = (FirstOfJanuary2019 - vehicle.DateOfFirstRegistration).TotalDays >= 365;
             bool isVehicleOverFortyThousand = vehicle.ListPrice >= 40000;
             int vehicleTax;
-            
+
             if (isVehicleOlderThanOneYear)
             {
                 if (isVehicleOverFortyThousand)
@@ -26,10 +26,28 @@ namespace TaxCalculator
             }
             else
             {
-                vehicleTax = CalculateTaxBasedOnEmissions(vehicle.Co2Emissions, vehicle.FuelType);
+                if (vehicle.IsRde2Compliant)
+                {
+                    vehicleTax = CalculateTaxBasedOnEmissionsForRde2Compliant(vehicle.Co2Emissions, vehicle.FuelType);
+                }
+                else
+                {
+                    vehicleTax = CalculateTaxBasedOnEmissions(vehicle.Co2Emissions, vehicle.FuelType);
+                }
             }
 
             return vehicleTax;
+        }
+
+        private int CalculateTaxBasedOnEmissionsForRde2Compliant(int vehicleCo2Emissions, FuelType vehicleFuelType)
+        {
+            int totalTax;
+            var emissions = vehicleCo2Emissions;
+            totalTax = StaticEmissions.NewPetrolAndRDE2Compliant.FirstOrDefault(dict => dict.Key >= emissions)
+                .Value;
+            
+            return totalTax;
+
         }
 
         private int CalculateTaxBasedOnEmissions(int vehicleCo2Emissions, FuelType vehicleFuelType)
@@ -55,8 +73,7 @@ namespace TaxCalculator
 
             return totalTax;
         }
-
-
+        
 
         private static int CalculateTaxBasedOnFuelTypeForCheap(FuelType fuelType)
         {
