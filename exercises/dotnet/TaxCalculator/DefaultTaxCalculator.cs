@@ -26,7 +26,7 @@ namespace TaxCalculator
             }
             else
             {
-                if (vehicle.IsRde2Compliant)
+                if (vehicle.IsRde2Compliant || vehicle.FuelType == FuelType.Petrol)
                 {
                     vehicleTax = CalculateTaxBasedOnEmissionsForRde2Compliant(vehicle.Co2Emissions, vehicle.FuelType);
                 }

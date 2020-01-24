@@ -10,7 +10,7 @@ namespace TaxCalculator
         public int ListPrice { get; }
         public bool IsRde2Compliant { get; }
 
-        public Vehicle(int co2Emissions, FuelType fuelType, DateTime dateOfFirstRegistration, int listPrice, bool isRde2Compliant = true )
+        public Vehicle(int co2Emissions, FuelType fuelType, DateTime dateOfFirstRegistration, int listPrice, bool isRde2Compliant = false )
         {
             Co2Emissions = co2Emissions;
             FuelType = fuelType;
